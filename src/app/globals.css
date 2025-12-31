@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LUMINACAL PREMIUM VISUAL SYSTEM
+   5-Layer Architecture: Background → Light → Surface → Content → Motion
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* Exact Colors from Specs */
+  --color-bg-main: #0a0a0f;
+  --color-bg-secondary: #0d0d14;
+  --color-bg-tertiary: #111118;
+
+  --color-magenta-600: #d946ef;
+  --color-magenta-500: #ec4899;
+  --color-magenta-400: #f472b6;
+
+  --color-purple-600: #a855f7;
+  --color-purple-500: #8b5cf6;
+  --color-purple-400: #7c3aed;
+
+  --color-cyan-600: #06b6d4;
+  --color-cyan-500: #22d3ee;
+  --color-cyan-400: #67e8f9;
+
+  --color-blue-600: #3b82f6;
+  --color-blue-500: #60a5fa;
+  --color-blue-400: #2563eb;
+
+  --color-success: #22c55e;
+  --color-success-light: #4ade80;
+  --color-warning: #f97316;
+  --color-warning-light: #fb923c;
+  --color-coral: #f87171;
+  --color-salmon: #fb7185;
+
+  /* Typography */
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Animations */
+  --animate-glow-breathe: glow-breathe 4s ease-in-out infinite;
+  --animate-floating: floating 8s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
+
+  /* Easings */
+  --ease-fluid: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  /* Backgrounds */
+  --bg-main: #0a0a0f;
+  --bg-secondary: #0d0d14;
+  --bg-tertiary: #111118;
+
+  /* Text Opacity */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted: rgba(255, 255, 255, 0.55);
+  --text-subtle: rgba(255, 255, 255, 0.35);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg-hover: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: 20px;
+  --glass-blur-heavy: 40px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--bg-main);
+    color: white;
+    font-family: var(--font-sans);
+    line-height: 1.7;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-purple-500);
+    outline-offset: 2px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+}
+
+.glass-card-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+  background: var(--glass-bg-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #f472b6, #a855f7, #06b6d4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.aurora-bg {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.08) 0%, transparent 70%),
+    var(--bg-main);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LAYER 3: LIGHTING & GLOW
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.glow-halo {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.15;
+  mix-blend-mode: screen;
+}
+
+/* Breathing Animation for CTA Glow */
+@keyframes glow-breathe {
+
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1) blur(80px);
+  }
+
+  50% {
+    opacity: 0.35;
+    transform: scale(1.1) blur(100px);
+  }
+}
+
+.animate-glow-breathe {
+  animation: glow-breathe 4s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LAYER 4: TYPOGRAPHY
+   Focused on restraint and hierarchy
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.text-hero {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  background: linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0.7));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-aurora {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple), var(--accent-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LAYER 5: MOTION (IDLE)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes floating {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+
+  66% {
+    transform: translateY(5px) rotate(-1deg);
+  }
+}
+
+.animate-floating {
+  animation: floating 8s ease-in-out infinite;
+}
+
+/* Utility for section spacing */
+.section-premium {
+  padding: clamp(100px, 15vw, 200px) 0;
+}

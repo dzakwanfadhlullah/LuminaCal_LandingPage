@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LuminaCal - Precision Nutrition</title>
+    <!-- Tailwind CSS with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#050508',
+                        'glass-border': 'rgba(255, 255, 255, 0.1)',
+                        'glass-bg': 'rgba(255, 255, 255, 0.05)',
+                        'primary-blue': '#3B82F6',
+                        'primary-cyan': '#06B6D4',
+                    },
+                    backgroundImage: {
+                        'hero-glow': 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15), transparent 60%)',
+                        'purple-glow': 'radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.1), transparent 50%)',
+                        'btn-gradient': 'linear-gradient(to right, #3B82F6, #06B6D4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom CSS for specific effects not easily covered by Tailwind utilities -->
+    <style data-purpose="custom-effects">
+        body {
+            background-color: #050508;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Background Glows */
+        .ambient-glow-1 {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(76, 29, 149, 0.2) 0%, transparent 70%);
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            bottom: 20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+            filter: blur(100px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #fff, #cbd5e1);
+        }
+
+        /* Button Glow */
+        .btn-glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.7);
+            transform: translateY(-1px);
+        }
+
+        /* Toggle Switch Custom */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #68D391;
+        }
+
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: #68D391;
+        }
+    </style>
+    <style>
+        /* Enhanced Glass Card per user request */
+        .glass-card-enhanced {
+            border-radius: 20px !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        /* Updated Button Glow */
+        .btn-glow:hover {
+            box-shadow: 0 0 15px #3b82f6 !important;
+            transform: translateY(-1px);
+        }
+
+        /* Pink Ambient Glow for Health Section */
+        .ambient-glow-pink {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 60%);
+            filter: blur(100px);
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased relative min-h-screen">
+    <!-- Ambient Background Elements -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+    <!-- BEGIN: Header -->
+    <header class="fixed top-0 w-full z-50 glass-header transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo Area -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" data-purpose="logo">
+                    <!-- Simple CSS Moon Icon placeholder -->
+                    <div
+                        class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30">
+                        <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <span
+                        class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-white">LuminaCal</span>
+                </div>
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex space-x-8" data-purpose="main-nav">
+                    <a class="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+                        href="#">Features</a>
+                    <a class="text-gray-300 hover:text-white transition-colors text-sm font-medium" href="#">Data
+                        Privacy</a>
+                    <a class="text-gray-300 hover:text-white transition-colors text-sm font-medium"
+                        href="#">Download</a>
+                </nav>
+                <!-- Right Side Actions -->
+                <div class="flex items-center space-x-4">
+                    <span class="text-xs text-gray-400 hidden sm:block">Dark/Light Mode</span>
+                    <!-- Simple Toggle Switch -->
+                    <div
+                        class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                        <input
+                            class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer checked:right-0 right-5 transition-all duration-300"
+                            id="toggle" name="toggle" type="checkbox" />
+                        <label class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-700 cursor-pointer"
+                            for="toggle"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- END: Header -->
+    <main class="relative z-10 pt-24 pb-20 overflow-hidden">
+        <!-- BEGIN: Hero Section -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-48">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Hero Content -->
+                <div class="space-y-8 text-center md:text-left z-20">
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
+                        <span class="block text-gradient">Precision Nutrition.</span>
+                        <span class="block text-gradient">Powered by Vision.</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg md:text-xl max-w-lg mx-auto md:mx-0 leading-relaxed">
+                        Your personal AI dietitian that recognizes your plate and calculates your macros in seconds.
+                        Experience calorie tracking redefined in glass.
+                    </p>
+                    <div class="pt-4 flex justify-center md:justify-start">
+                        <a class="inline-flex items-center px-8 py-3 rounded-full bg-btn-gradient text-white font-semibold text-sm tracking-wide btn-glow relative overflow-hidden group"
+                            href="#">
+                            <span class="relative z-10">Download Beta v1 (APK)</span>
+                            <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Hero Image (Phone Mockup) -->
+                <div class="relative flex justify-center md:justify-end" data-purpose="hero-image-container">
+                    <!-- Decorative sparkle elements -->
+                    <div
+                        class="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] transform rotate-[-5deg] md:rotate-0 hover:rotate-0 transition-transform duration-500">
+                        ✦</div>
+                    <div
+                        class="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] transform rotate-[-5deg] md:rotate-0 hover:rotate-0 transition-transform duration-500">
+                        ✦</div>
+                    <!-- Placeholder for Hero Phone -->
+                    <div
+                        class="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] transform rotate-[-5deg] md:rotate-0 hover:rotate-0 transition-transform duration-500">
+                        <div
+                            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-600/30 rounded-full blur-[80px] -z-10">
+                        </div>
+                        <!-- MISSING_IMAGES: Hero phone UI showing dashboard -->
+                        <img alt="LuminaCal App Dashboard"
+                            class="w-full h-full object-contain rounded-[24px] border border-white/10 drop-shadow-2xl relative z-10"
+                            id="hero-phone-img"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfY27DkFNppAp8ydgElY-cSQbT5sq5lgfz7P4PAI8-RVQEjD4Fcfm1ni_6Opym1ExwgxVEVRmkeVHlELk4Vr44w2KG0MI2vjyJwGljwd25PWxuylHSx61UihEbit6WCEIUie9yonr8CE_OFgrQ1hFJn1U8x4gd84khWFRbJsjsRFaJkw4i3a9UtpAE-QhKYIhzhiW4v38xdLGe7N9tMJNoVBZFg-iReRaAHFxvNhZLLMjenSbBqLI7UUlT0rLtiAEWmxJSPKlKzV0" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: Hero Section -->
+        <!-- BEGIN: Recognition Section -->
+        <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Instant Recognition, Unmatched Accuracy.</h2>
+                <!-- Decorative elements -->
+                <div class="absolute top-24 left-10 md:left-20 text-purple-400 text-xl opacity-60">✦</div>
+            </div>
+            <!-- Landscape Phone Container -->
+            <div class="relative w-full max-w-4xl mx-auto rounded-[2rem] border-4 border-gray-700/50 p-2 glass-panel shadow-2xl overflow-hidden glass-card-enhanced"
+                data-purpose="recognition-demo">
+                <!-- MISSING_IMAGES: Landscape phone UI showing food recognition -->
+                <img alt="Food Recognition Interface" class="w-full h-[400px] object-cover rounded-xl relative z-10"
+                    id="recognition-phone-img"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCciXXM68j89sHhj0u9xhNy8i19xa1-wkN63Mi54icewmdHxTVo1VM9tnMRIwUazXzxmVnkhas1oKqwyyhpgVgS3P8tYuuI2HE5qk4TnyyOGV4zsNH8oZqsWeYE_U6VDvAUNvTnPNVRWeoKDhM2qdkfjV5viG64dYvFjaAk3tXgdGphXVtSMXYr5Mhusd3isWXk2UYX5BKbhNyYTnTOJUCF8oxB0FNWm390sX8ZDW1sCI6fh-oFRM-I4RZwVFHP2EB56wL2I6B0yAI" />
+                <!-- Overlay Tags (Simulating the UI overlay on top of the image) -->
+                <!-- Note: In a real implementation, these might be part of the image or absolute positioned HTML elements. 
+                     Here, purely HTML overlays for effect if the placeholder is plain. -->
+                <div
+                    class="absolute top-1/4 left-10 bg-pink-600/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold border border-pink-400/30 shadow-lg transform -rotate-3 z-20">
+                    Protein: 32g</div>
+                <div
+                    class="absolute bottom-1/4 left-20 bg-orange-600/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold border border-orange-400/30 shadow-lg transform rotate-2 z-20">
+                    Fat: 28g</div>
+                <div
+                    class="absolute top-1/3 right-16 bg-green-600/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold border border-green-400/30 shadow-lg z-20">
+                    Carbs: 25g</div>
+                <div
+                    class="absolute bottom-1/3 right-8 bg-blue-600/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold border border-blue-400/30 shadow-lg z-20">
+                    Fiber: 6g</div>
+            </div>
+        </section>
+        <!-- END: Recognition Section -->
+        <!-- BEGIN: Health Dashboard Section -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative">
+            <div class="ambient-glow-pink"></div>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Your Health, At a Glance.</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Calories & Macros Card -->
+                <div
+                    class="lg:col-span-2 glass-panel p-6 md:p-10 relative overflow-hidden group glass-card-enhanced h-full">
+                    <!-- Gradient glow effect behind content -->
+                    <div
+                        class="absolute top-1/2 left-1/4 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl group-hover:bg-pink-500/30 transition-colors">
+                    </div>
+                    <div
+                        class="absolute top-1/2 right-1/4 w-40 h-40 bg-green-500/20 rounded-full blur-3xl group-hover:bg-green-500/30 transition-colors">
+                    </div>
+                    <!-- MISSING_IMAGES: Dashboard chart UI -->
+                    <img alt="Calories and Macros Dashboard"
+                        class="w-full h-64 object-contain relative z-10 glass-card-enhanced h-full"
+                        id="calories-macros-img"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_LCHjYKVs7q70F-JX0PdE6rPcM3xZLZfK57K_k3ScamQxu-Kg6cFWjRSn4EUJHC3qXfgcsEJHJ9l9fKqofnU_HGT01OTY1eOut-HOCgijhEHHYk8T9C08vrFLmveQHDbJHEqxm4UVRg87c90D2J77_Epe86aR5dyWK2yqXHTZBbk3W-gf83-xMzUuehJJl9Wn7U0vAPl7By5tKQhGegvLxLZYAbrdJONXdH198lzN9kwpbtUbHNRH_vf6tJwwuMlZK9OZkg-MUEE" />
+                </div>
+                <!-- Water Intake Card -->
+                <div
+                    class="lg:col-span-1 glass-panel p-6 md:p-10 flex flex-col items-center justify-center relative overflow-hidden glass-card-enhanced h-full">
+                    <div class="absolute inset-0 bg-blue-900/10"></div>
+                    <!-- MISSING_IMAGES: Water glass graphic -->
+                    <img alt="Water Intake Tracker"
+                        class="w-full h-auto max-h-[300px] object-contain relative z-10 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+                        id="water-intake-img"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgal-RpJTHApU0YC4a-sAxNEDK8G7H98RfgOjJAJKjkIFQhHls-LW5xQixsr8zJEBxqNLuqJmVDA93yHb2AgJULPKJkX7XslzpvgMFdxxEyTg53Hc63QE0N5QppnLpFo_K-cKq4sdMpIlhGeKTKTMV1uGDO1GDBAB9FT7sheb6ZROamYoCz9rMHKYIAIePJ-5lICmbs1Aj0kwOQak5JA6LWj5gvrd-eSV0lWkK8N23wSNuydZUMQOozmMSImd06tlWoBnq-HTTZ-E" />
+                    <button
+                        class="mt-6 px-6 py-2 rounded-full bg-blue-600/20 border border-blue-400/30 text-blue-200 text-sm hover:bg-blue-600/40 transition-colors">
+                        Drink More
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- END: Health Dashboard Section -->
+        <!-- BEGIN: Local Storage Section -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-48">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="order-2 md:order-1 space-y-6">
+                    <h2 class="text-3xl md:text-5xl font-bold leading-tight">
+                        Your Rules. <br />
+                        <span class="text-blue-400">Local Storage.</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed max-w-md">
+                        Your data stays yours. Securely stored on your device, not in the cloud. We prioritize your
+                        privacy above all else.
+                    </p>
+                </div>
+                <!-- Graphic Content -->
+                <div class="order-1 md:order-2 relative" data-purpose="storage-graphic">
+                    <!-- Glow behind folder -->
+                    <div class="absolute inset-0 bg-blue-500/10 blur-3xl rounded-full"></div>
+                    <div
+                        class="glass-panel rounded-2xl p-4 border border-white/10 relative z-10 transform md:rotate-3 hover:rotate-0 transition-transform duration-500 glass-card-enhanced">
+                        <!-- MISSING_IMAGES: Holographic folder UI -->
+                        <img alt="Local Storage Encryption Graphic" class="w-full h-auto rounded-lg shadow-2xl"
+                            id="storage-graphic-img"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgyOe4-FQq59_Iw_s_KrVWLWEMf_4Zh42l5AtEL3EvG_pmJBJq3qL3cYCXjgjtm5ZDdSt22WriQmGZF-XW-cZoinlcdUyo3HvI0Q3okAhF-2Y92BDWRacZ0t17Y_YHor0XQ9U4Lx7xgSFJKGVd9t-g_EUqLzXzxUJXVLZGfoq2s8Mtg1F3kVECgexSjnO2f0ud80WvmXwL_CEnRKc281NzNnefQs5wOAnbm4EzNDZ5fkdXN9LJke94tXnRTBr9lqIlUcCFkJTDnmc" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END: Local Storage Section -->
+        <!-- BEGIN: Footer CTA -->
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center relative">
+            <div
+                class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full bg-gradient-to-t from-blue-900/10 to-transparent pointer-events-none">
+            </div>
+            <h2 class="text-3xl md:text-5xl font-bold mb-10 relative z-10">Start Your Journey Today.</h2>
+            <div class="relative z-10 inline-block">
+                <!-- Decorative stars around button -->
+                <div class="absolute -left-8 top-1/2 text-purple-400 text-xl animate-bounce">✦</div>
+                <div class="absolute -right-8 top-0 text-blue-400 text-lg animate-pulse">✦</div>
+                <a class="inline-flex items-center justify-center px-10 py-4 rounded-full bg-btn-gradient text-white font-bold text-base tracking-wide btn-glow overflow-hidden relative group"
+                    href="#">
+                    <span class="relative z-10">Download Beta v1 (APK)</span>
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                </a>
+            </div>
+        </section>
+        <!-- END: Footer CTA -->
+    </main>
+    <!-- BEGIN: Footer Bottom -->
+    <footer class="relative z-10 py-8 border-t border-white/5 bg-[#050508]">
+        <div
+            class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-center items-center gap-6 text-xs text-gray-500">
+            <div class="bg-gray-800/50 px-4 py-2 rounded-full border border-gray-700">
+                <a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+                <span class="mx-2">|</span>
+                <a class="hover:text-white transition-colors" href="#">Terms &amp; Conditions</a>
+                <span class="mx-2">|</span>
+                <span class="text-gray-600">Build v1.0.0 (Beta)</span>
+            </div>
+        </div>
+    </footer>
+    <!-- END: Footer Bottom -->
+</body>
+
+</html>
