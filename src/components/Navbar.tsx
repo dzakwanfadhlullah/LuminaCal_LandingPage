@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -15,7 +15,6 @@ const navLinks = [
 export const Navbar = () => {
     const [isScrolled, setIsScrolled] = React.useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-    const [isDarkMode, setIsDarkMode] = React.useState(true);
 
     React.useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -32,7 +31,7 @@ export const Navbar = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className={cn(
                         "rounded-full px-6 py-3 flex items-center justify-between transition-all duration-500",
-                        "bg-[#0d0d14]/80 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+                        "bg-white/80 backdrop-blur-xl border border-white/50 shadow-lg"
                     )}
                 >
                     {/* Logo */}
@@ -43,9 +42,8 @@ export const Navbar = () => {
                                 alt="LuminaCal"
                                 className="w-8 h-8 group-hover:scale-110 transition-transform duration-300"
                             />
-                            <div className="absolute inset-0 bg-orange-400 blur-lg opacity-20" />
                         </div>
-                        <span className="text-lg font-semibold tracking-tight text-white">
+                        <span className="text-lg font-semibold tracking-tight text-gray-900">
                             LuminaCal
                         </span>
                     </Link>
@@ -56,19 +54,16 @@ export const Navbar = () => {
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="px-4 py-2 text-sm font-medium text-white/60 hover:text-white hover:bg-white/5 rounded-full transition-all duration-300"
+                                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-all duration-300"
                             >
                                 {link.name}
                             </Link>
                         ))}
                     </div>
 
-
-
-
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden text-white p-2"
+                        className="md:hidden text-gray-900 p-2"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
                         {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -85,12 +80,12 @@ export const Navbar = () => {
                         exit={{ opacity: 0, y: -10 }}
                         className="md:hidden mt-2 mx-auto max-w-5xl"
                     >
-                        <div className="rounded-2xl bg-[#0d0d14]/95 backdrop-blur-2xl border border-white/10 p-6 flex flex-col gap-4">
+                        <div className="rounded-2xl bg-white/95 backdrop-blur-2xl border border-white/50 shadow-lg p-6 flex flex-col gap-4">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className="text-lg font-medium text-white/70 hover:text-white transition-colors"
+                                    className="text-lg font-medium text-gray-600 hover:text-gray-900 transition-colors"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {link.name}

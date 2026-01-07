@@ -1,44 +1,28 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   LUMINACAL PREMIUM VISUAL SYSTEM
-   5-Layer Architecture: Background → Light → Surface → Content → Motion
+   LUMINACAL PREMIUM LIGHT THEME
+   Soft gradient with 3D glass effects
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @theme {
-  /* Exact Colors from Specs */
-  --color-bg-main: #0a0a0f;
-  --color-bg-secondary: #0d0d14;
-  --color-bg-tertiary: #111118;
+  /* Light Theme Colors */
+  --color-bg-cream: #fef7ed;
+  --color-bg-sky: #e8f4fe;
 
-  --color-magenta-600: #d946ef;
-  --color-magenta-500: #ec4899;
-  --color-magenta-400: #f472b6;
-
-  --color-purple-600: #a855f7;
-  --color-purple-500: #8b5cf6;
-  --color-purple-400: #7c3aed;
-
-  --color-cyan-600: #06b6d4;
-  --color-cyan-500: #22d3ee;
-  --color-cyan-400: #67e8f9;
-
-  --color-blue-600: #3b82f6;
-  --color-blue-500: #60a5fa;
-  --color-blue-400: #2563eb;
+  /* Accent - Orange (from app) */
+  --color-orange-600: #ea580c;
+  --color-orange-500: #f97316;
+  --color-orange-400: #fb923c;
+  --color-orange-300: #fdba74;
 
   --color-success: #22c55e;
   --color-success-light: #4ade80;
-  --color-warning: #f97316;
-  --color-warning-light: #fb923c;
-  --color-coral: #f87171;
-  --color-salmon: #fb7185;
 
   /* Typography */
   --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Animations */
-  --animate-glow-breathe: glow-breathe 4s ease-in-out infinite;
   --animate-floating: floating 8s ease-in-out infinite;
   --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
 
@@ -48,21 +32,16 @@
 }
 
 :root {
-  /* Backgrounds */
-  --bg-main: #0a0a0f;
-  --bg-secondary: #0d0d14;
-  --bg-tertiary: #111118;
+  /* Text Colors for Light Theme */
+  --text-primary: #1a1a1a;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-subtle: #9ca3af;
 
-  /* Text Opacity */
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.75);
-  --text-muted: rgba(255, 255, 255, 0.55);
-  --text-subtle: rgba(255, 255, 255, 0.35);
-
-  /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-bg-hover: rgba(255, 255, 255, 0.12);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  /* Glassmorphism for Light Theme */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-hover: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.5);
   --glass-blur: 20px;
   --glass-blur-heavy: 40px;
 }
@@ -75,8 +54,8 @@
   }
 
   body {
-    background: var(--bg-main);
-    color: white;
+    background: transparent;
+    color: var(--text-primary);
     font-family: var(--font-sans);
     line-height: 1.7;
   }
@@ -89,16 +68,17 @@
   h6 {
     letter-spacing: -0.02em;
     line-height: 1.2;
+    color: var(--text-primary);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-purple-500);
+    outline: 2px solid var(--color-orange-500);
     outline-offset: 2px;
   }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   UTILITIES
+   UTILITIES - LIGHT THEME
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .glass-card {
@@ -107,6 +87,7 @@
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
   border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
 .glass-card-hover {
@@ -115,13 +96,13 @@
 
 .glass-card-hover:hover {
   background: var(--glass-bg-hover);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.8);
   transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, #f472b6, #a855f7, #06b6d4);
+  background: linear-gradient(135deg, #f97316, #ea580c);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -129,9 +110,8 @@
 
 .aurora-bg {
   background:
-    radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse at 15% 25%, rgba(251, 146, 60, 0.06) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 75%, rgba(251, 191, 36, 0.04) 0%, transparent 40%),
     var(--bg-main);
 }
 
