@@ -9,6 +9,11 @@ const inter = Inter({
   display: "swap",
 });
 
+export const viewport = {
+  width: 1280,
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
   title: "LuminaCal | Premium AI Calorie Tracker",
   description:
